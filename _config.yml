@@ -104,4 +104,9 @@ theme: fluid
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: git@github.com:czqmike/czqmike.github.io.git
+  branch: master
+  name: czqmike
+  email: czqmike@foxmail.com
+  
