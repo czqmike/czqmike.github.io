@@ -48,7 +48,7 @@ RPN主要做两件事：
 > p.s. 不是所有的anchor都会拿来标注，一些规则如下：
     1. feature map边界线上的anchor
     2. 背景和前景交界地带的anchor不参与训练
-    3. 前景的个数不能超过batch size的一般
+    3. 前景的个数不能超过batch size的一半
 
 ![生成的anchors](anchors.jpg)
 
@@ -58,7 +58,8 @@ RPN主要做两件事：
 然后再来聊下bounding box regression，现在我们有positive anchor A和ground truth G，我们的目标是寻找一种关系，使得输入的A经过映射后得到一个跟G更加接近的回归窗口G', 即：
 - $A = (A_{x}, A_{y}, A_{w}, A_{h})$, $G = (G_{x}, G_{y}, G_{w}, G_{h})$
 - 寻找一种变换F， 使：
-  $$F(A_{x}, A_{y}, A_{w}, A_{h}) = (G'_{x}, G'_{y}, G'_{w}, G'_{h})$$，其中$(G'_{x}, G'_{y}, G'_{w}, G'_{h}) \approx (G_{x}, G_{y}, G_{w}, G_{h})$
+  $$ F(A_{x}, A_{y}, A_{w}, A_{h}) = (G'_{x}, G'_{y}, G'_{w}, G'_{h}) $$  
+  其中$(G'_{x}, G'_{y}, G'_{w}, G'_{h}) \approx (G_{x}, G_{y}, G_{w}, G_{h})$
 
 那么做何种变换F呢？比较简单的思路是：
 - 先做平移
