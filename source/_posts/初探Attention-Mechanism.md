@@ -26,13 +26,13 @@ So it does not attempt to encode input sentence into a single fixed-length vecto
 
 ## How does it work?
 - Generate $Y_t$ in timestep t
-  1. Encode input sentence $X_1..X_n$ and get hidden states of encoder RNN: $h_1, h_2, ..,  h_n $
+  1. Encode input sentence $X_1..X_n$ and get hidden states of encoder RNN: $ h_{1}, h_{2}, ..,  h_{n} $
   2. Get decoder's previous internal state and set as $z$ 
-  3. Scores: do **match** with $h_1$ .. $h_n$ and $z$, then calculate the similarity $a^t_0 .. a^t_i$ of them
-  4. Attention weight: do softmax with $a^t_0 .. a^t_n$ to $\hat{a}^t_0 .. \hat{a}^t_n$
-  apply weights to hidden states as context vector: $$c_i = \sum_{i=1}^{n} {\hat{a}^t_i h_i }$$
-  5. Decoder hidden states $s$: $s_t = s_{t-1} + c_i$
-  6. Generate output $Y$: decode $S_t$ to generate output $Y_t$
+  3. Scores: do **match** with $h_{1}$ .. $h_{n}$ and $z$, then calculate the similarity $a^{t}_{0} .. a^{t}_{i}$ of them
+  4. Attention weight: do softmax with $a^{t}_{0} .. a^{t}_{n}$ to $\hat{a}^{t}_{0} .. \hat{a}^{t}_{n}$
+  apply weights to hidden states as context vector: $$c_{i} = \sum_{i=1}^{n} {\hat{a}^{t}_{i} h_{i} }$$
+  5. Decoder hidden states $s$: $s_{t} = s_{t-1} + c_{i}$
+  6. Generate output $Y$: decode $S_{t}$ to generate output $Y_{t}$
 
   > What is *match*?
   *match* is a align method to descripe how much input words $X$ influence on output $Y_t$
