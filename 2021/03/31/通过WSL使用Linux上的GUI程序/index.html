@@ -1,0 +1,569 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="">
+  
+  <meta name="author" content="czqmike">
+  <meta name="keywords" content="Computer Science, Deep Learning, and more">
+  
+  <title>通过WSL远程使用Linux上的GUI程序 - czqmike&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"localhost","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>return ;</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="通过WSL远程使用Linux上的GUI程序">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-31 20:07" pubdate>
+        2021年3月31日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      829 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">通过WSL远程使用Linux上的GUI程序</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：3 个月前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="写在前面水字数"><a class="markdownIt-Anchor" href="#写在前面水字数"></a> 写在前面<s>水字数</s></h2>
+<blockquote>
+<p>好久没有水文章了，一半是因为这个学期学业繁忙，论文改的焦头烂额的。另一半就是人的惰性了。<br />
+最近沉迷于<a target="_blank" rel="noopener" href="https://space.bilibili.com/94742590?from=search&amp;seid=18253544675360496862">Veritasium真理元素</a>的视频，里面讲了不少物理数学方面的有趣现象和说明，感觉质量还是挺高的，在此推销一波~</p>
+</blockquote>
+<h2 id="正题"><a class="markdownIt-Anchor" href="#正题"></a> 正题</h2>
+<p>直接进入正题。为了在远程环境上看到Python脚本画出来的图，以前我都是使用<code>plt.savefig(...)</code>保存成图像再看。<br />
+今天尝试nltk的自然语言处理库时发现其中自带的画图函数好像不支持保存，Stackoverflow上的方法要先把图画出来-&gt;保存成ps矢量图-&gt;再用工具把矢量图转化成位图，这样才能在VsCode中看到输出的图像。。<br />
+我的洁癖+懒惰症第一时间就让我打消了这个念头，而且也不优雅。</p>
+<p>然后我就开始寻找更直接的方法–对，就是直接在Win上使用Linux的GUI程序。</p>
+<p>之前实习的时候看师傅做过一次，也是用的WSL调用了一个GUI程序。<br />
+在网上搜了一下，发现和我一样闲并且有强迫症的人还真不少。😃<br />
+效果如下：<br />
+<img src="WSL_GUI.png" srcset="/img/loading.gif" alt="在Win上直接使用WSL/Remote Linux的GUI程序" /></p>
+<p>大致上分为两个步骤：</p>
+<ul>
+<li>
+<ol>
+<li>服务器端配置X11转发。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>客户端配置X11接收程序，将其转化为界面。</li>
+</ol>
+</li>
+</ul>
+<h3 id="服务端配置"><a class="markdownIt-Anchor" href="#服务端配置"></a> 服务端配置</h3>
+<p>这里的服务端指的是Linux的桌面发行版，并且默认你已经配置好了SSH连接。<br />
+首先在服务器上将<code>/etc/ssh/ssh_config</code>中的以下参数设为下列值。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">X11Forwarding</span> <span class="hljs-literal">yes</span><br>X11DisplayOffset <span class="hljs-number">10</span><br>X11UseLocalhost <span class="hljs-literal">yes</span><br></code></pre></td></tr></table></figure>
+<p>这样SSH就可以转发X11信号了。<br />
+注意在连接SSH的时候一定要指定<code>-X</code>参数，确认使用X11，即<br />
+<code>ssh -p 22 -X username@ipaddress</code></p>
+<h3 id="客户端配置"><a class="markdownIt-Anchor" href="#客户端配置"></a> 客户端配置</h3>
+<p>客户端是Windows（Mac OS和其他Linux应该也可以）。<br />
+首先下载一个<a target="_blank" rel="noopener" href="http://www.straightrunning.com/XmingNote">Xming</a>，安装时把Xlaunch也装上，配置就next一把梭。此处略过。<br />
+唯一要注意的是要记得显示器编号 (默认是0)，后面会用到。</p>
+<p>先启动Xlaunch一把梭后，系统栏里会有个小小的X图标，即代表Xming启动了。<br />
+我们只要使用<br />
+<code>DISPLAY=localhost:0 ssh -p 22 -X username@ipaddress</code><br />
+来远程登录，登录后就可以直接输入GUI命令，比如：GVim，FireFox等。<br />
+不过远程嘛，你懂的。。延迟一般都比较高，体验被命令行完爆。</p>
+<p>但是比较一个比较有用的做法是直接在Win上使用WSL的GUI:<br />
+<code>DISPLAY=0:0 gvim</code><br />
+DISPLAY的前一个参数应该是local port， 后一个参数是显示器编号。<br />
+通用的命令如下：<br />
+<code>DISPLAY=[local port]: [monitor num] appname</code><br />
+这种方法我认为比虚拟机上的体验还要好，因为不用同时跑两个系统。本质上来讲，WSL是套了Linux壳的Win，然后X11是用Linux的绘图标准来绘图，也就是说，相当于只跑了一个系统但是能够同时享受到两个系统的优势！</p>
+<h2 id="ref"><a class="markdownIt-Anchor" href="#ref"></a> Ref</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.rehtt.com/index.php/archives/145/">【Linux】WSL+Xming实现gui显示</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ithome.com/html/win10/353700.htm">Win10 Linux 子系统安装图形化界面的两种方法及其对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/akuoma/article/details/82182913">Xming +Xshell 6 实现远程打开Linux界面</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/81622442">新手Linux子系统方案：WSL+Xming+cmder+zsh与高能物理Cern Root的安装</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/WSL/">WSL</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%9C%E7%A8%8B/">远程</a>
+                    
+                      <a class="hover-with-bg" href="/tags/GUI/">GUI</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/12/4%E6%9C%8812%E5%AD%97%E8%8A%82%E7%AC%94%E8%AF%95%E8%B8%A9%E5%9D%91/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">4月12日字节笔试踩坑</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/06/%E7%90%90%E7%A2%8E%E8%AE%B0%E4%BA%8B/">
+                        <span class="hidden-mobile">琐碎记事</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://localhost/2021/03/31/%E9%80%9A%E8%BF%87WSL%E4%BD%BF%E7%94%A8Linux%E4%B8%8A%E7%9A%84GUI%E7%A8%8B%E5%BA%8F/';
+        this.page.identifier = '/2021/03/31/%E9%80%9A%E8%BF%87WSL%E4%BD%BF%E7%94%A8Linux%E4%B8%8A%E7%9A%84GUI%E7%A8%8B%E5%BA%8F/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + '' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.12.0/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
