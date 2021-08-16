@@ -370,7 +370,7 @@ footer:
   beian:
     enable: true
     # ICP证号<a href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备20003232号</a>
-    icp_text: 鄂ICP备20003232号
+    icp_text: 鄂ICP备20003232号-1
     # 公安备案号，不填则只显示ICP
     police_text: 
     # 公安备案的编号，用于URL跳转查询
