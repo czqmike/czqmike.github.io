@@ -19,6 +19,7 @@
 
 - `hexo_source`
 	2. 更新blog源文件  
+
 	```bash
 	git add .  
 	git commit -m "$DESCRIPTION"  
@@ -26,6 +27,7 @@
 	```
 - `master`
 	3. 在Server上生成静态页面，并同步至GithubPage（Server上的blog由pm2和hexo自动同步，更新`hexo_source`中的源文件即可）  
+
 	```bash
 	hexo g -d
 	```
