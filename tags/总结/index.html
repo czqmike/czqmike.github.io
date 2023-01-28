@@ -20,25 +20,9 @@
   <meta name="author" content="czqmike">
   <meta name="keywords" content="Computer Science, Deep Learning, and more">
   
-  <title>关系抽取公开数据集整理 - czqmike&#39;s blog</title>
+  <title>标签 - 总结 - czqmike&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-  
 
 
 
@@ -66,7 +50,7 @@
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -165,54 +149,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="关系抽取公开数据集整理">
+            <span class="h2" id="subtitle" title="标签 - 总结">
               
             </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-11-18 00:23" pubdate>
-        2020年11月18日 凌晨
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      90 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      1
-       分钟
-    </span>
-  
-
-  
-  
-    
-      <!-- 不蒜子统计文章PV -->
-      <span id="busuanzi_container_page_pv" style="display: none">
-        <i class="iconfont icon-eye" aria-hidden="true"></i>
-        <span id="busuanzi_value_page_pv"></span> 次
-      </span>
-    
-  
-</div>
 
             
           </div>
@@ -225,182 +164,40 @@
 
   <main>
     
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 1 篇文章</p>
+  <hr>
+  
+  
+    
       
+      <p class="h5">2023</p>
+    
+    <a href="/2023/01/28/2023%E4%BA%86%EF%BC%8C%E7%BB%99%E8%87%AA%E5%B7%B1%E5%AE%9A%E4%B8%AA%E5%B0%8F%E8%AE%A1%E5%88%92/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">2023了，给自己定个小计划</span>
+      <time style="float: right;">01-28</time>
+    </a>
+  
+</div>
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">关系抽取公开数据集整理</h1>
-            
-              <p class="note note-info">
-                
-                  本文最后更新于：2 年前
-                
-              </p>
-            
-            <div class="markdown-body">
-              <h2 id="datasets"><a class="markdownIt-Anchor" href="#datasets"></a> Datasets</h2>
-<!-- ✅❌ -->
-<blockquote>
-<p>说是数据集，可能叫做语料库(corpus)更加准确点？</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Name</th>
-<th style="text-align:center">Is Open?</th>
-<th style="text-align:center">Cost</th>
-<th style="text-align:center">From or Subject</th>
-<th style="text-align:center">Entity / Relation / Sentence Num</th>
-<th style="text-align:center">Link</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">TACRED</td>
-<td style="text-align:center">✅</td>
-<td style="text-align:center">$25</td>
-<td style="text-align:center">newswire and web</td>
-<td style="text-align:center">106,264 / 41 / 53,791</td>
-<td style="text-align:center"><a target="_blank" rel="noopener" href="https://nlp.stanford.edu/projects/tacred/">download</a> <a target="_blank" rel="noopener" href="http://aclweb.org/anthology/D17-1004">paper</a></td>
-</tr>
-<tr>
-<td style="text-align:center">DocRED</td>
-<td style="text-align:center">✅</td>
-<td style="text-align:center">Free</td>
-<td style="text-align:center">Wikipedia Document</td>
-<td style="text-align:center">132,375 / 96 / 40,276</td>
-<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/thunlp/DocRED">download</a> <a target="_blank" rel="noopener" href="http://arxiv.org/abs/1906.06127">paper</a></td>
-</tr>
-<tr>
-<td style="text-align:center">SciERC</td>
-<td style="text-align:center">✅</td>
-<td style="text-align:center">Free</td>
-<td style="text-align:center">AI Conference</td>
-<td style="text-align:center">8,089 / 4,716 / 500 docs</td>
-<td style="text-align:center"><a target="_blank" rel="noopener" href="http://nlp.cs.washington.edu/sciIE/">download</a> <a target="_blank" rel="noopener" href="http://arxiv.org/abs/1808.09602">paper</a></td>
-</tr>
-<tr>
-<td style="text-align:center">NYT</td>
-<td style="text-align:center">✅</td>
-<td style="text-align:center">$300</td>
-<td style="text-align:center">New York Times article</td>
-<td style="text-align:center">208,678 / 24 / 66,195 (Part)</td>
-<td style="text-align:center"><a target="_blank" rel="noopener" href="https://drive.google.com/open?id=10f24s9gM7NdyO3z5OqQxJgYud4NnCJg3">download</a> <a target="_blank" rel="noopener" href="http://aclweb.org/anthology/P18-1047">paper</a></td>
-</tr>
-<tr>
-<td style="text-align:center">WebNLG</td>
-<td style="text-align:center">✅</td>
-<td style="text-align:center">Free</td>
-<td style="text-align:center">DBpedia</td>
-<td style="text-align:center">25,298 / 246 / 9,674</td>
-<td style="text-align:center"><a target="_blank" rel="noopener" href="https://webnlg-challenge.loria.fr/download/">download</a> <a target="_blank" rel="noopener" href="http://aclweb.org/anthology/P18-1047">paper</a></td>
-</tr>
-</tbody>
-</table>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%85%B3%E7%B3%BB%E6%8A%BD%E5%8F%96/">关系抽取</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%85%AC%E5%BC%80%E6%95%B0%E6%8D%AE%E9%9B%86/">公开数据集</a>
-                    
-                  </div>
-                
+
+
+
               </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2020/12/01/Windows-Terminal%E4%B8%8B%E7%9A%84WSL%E9%85%8D%E7%BD%AEVim%E5%85%89%E6%A0%87/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Windows Terminal折腾记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2020/11/16/NLP%E7%9B%B8%E5%85%B3%E9%A1%B6%E4%BC%9A%E6%80%BB%E7%BB%93/">
-                        <span class="hidden-mobile">NLP相关顶会总结</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
             </div>
-
-            
-              <!-- Comments -->
-              <article class="comments" id="comments">
-                
-                  
-                
-                
-  <div class="disqus" style="width:100%">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_config = function() {
-        this.page.url = 'http://localhost/2020/11/18/%E5%85%B3%E7%B3%BB%E6%8A%BD%E5%8F%96%E5%85%AC%E5%BC%80%E6%95%B0%E6%8D%AE%E5%BA%93%E6%95%B4%E7%90%86/';
-        this.page.identifier = '/2020/11/18/%E5%85%B3%E7%B3%BB%E6%8A%BD%E5%8F%96%E5%85%AC%E5%BC%80%E6%95%B0%E6%8D%AE%E5%BA%93%E6%95%B4%E7%90%86/';
-      };
-      Fluid.utils.waitElementVisible('disqus_thread', function () {
-        var d = document, s = d.createElement('script');
-        s.src = '//' + '' + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', new Date());
-        (d.head || d.body).appendChild(s);
-      });
-    </script>
-    <noscript>Please enable JavaScript to view the
-      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
-    </noscript>
-  </div>
-
-
-              </article>
-            
-          </article>
+          </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
     
 
     
@@ -514,15 +311,9 @@
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
 
 
 
@@ -564,13 +355,6 @@
 
 
 
-
-  
-
-  
-    <!-- KaTeX -->
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.12.0/katex.min.css" />
-  
 
 
 
