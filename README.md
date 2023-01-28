@@ -18,6 +18,7 @@
 	```
 
 - `hexo_source`
+<<<<<<< HEAD
 2. 更新blog源文件  
 	```bash
 	git add .  
@@ -29,3 +30,16 @@
 	```bash
 	hexo g -d
 	```
+=======
+更新blog源文件  
+``bash  
+git add .    
+git commit -m "description"    
+git push -u origin hexo_source    
+``
+- `master`
+同步至GithubPage（Server上的blog由pm2和hexo自动同步，更新第一步中的源文件即可）  
+``bash  
+hexo g -d  
+``
+>>>>>>> e2eabc37a29a5a03382916b15a8269c87d044935
