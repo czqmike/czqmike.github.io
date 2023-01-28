@@ -8,7 +8,7 @@
 > 直接使用`pm2`和`hexo`跑Server上的网站，根目录为 *czqmike.github.io*
 
 - Server
-1. 更新 Server 上的静态页面文件，在根目录下执行
+	1. 更新 Server 上的静态页面文件，在根目录下执行
 
 	```bash
 	# hexo -h
@@ -18,28 +18,14 @@
 	```
 
 - `hexo_source`
-<<<<<<< HEAD
-2. 更新blog源文件  
+	2. 更新blog源文件  
 	```bash
 	git add .  
 	git commit -m "$DESCRIPTION"  
 	git push -u origin hexo_source  
 	```
 - `master`
-3. 在Server上生成静态页面，并同步至GithubPage（Server上的blog由pm2和hexo自动同步，更新`hexo_source`中的源文件即可）  
+	3. 在Server上生成静态页面，并同步至GithubPage（Server上的blog由pm2和hexo自动同步，更新`hexo_source`中的源文件即可）  
 	```bash
 	hexo g -d
 	```
-=======
-更新blog源文件  
-``bash  
-git add .    
-git commit -m "description"    
-git push -u origin hexo_source    
-``
-- `master`
-同步至GithubPage（Server上的blog由pm2和hexo自动同步，更新第一步中的源文件即可）  
-``bash  
-hexo g -d  
-``
->>>>>>> e2eabc37a29a5a03382916b15a8269c87d044935
