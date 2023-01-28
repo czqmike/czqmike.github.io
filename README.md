@@ -7,13 +7,13 @@
 ## Usage 
 - `hexo_source`
 更新blog源文件  
-``bash
-git add .  
-git commit -m "description"  
-git push -u origin hexo_source  
+``bash  
+git add .    
+git commit -m "description"    
+git push -u origin hexo_source    
 ``
 - `master`
 同步至GithubPage（Server上的blog由pm2和hexo自动同步，更新第一步中的源文件即可）  
-``bash
-hexo g -d
+``bash  
+hexo g -d  
 ``
