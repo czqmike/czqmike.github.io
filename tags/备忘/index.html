@@ -20,25 +20,9 @@
   <meta name="author" content="czqmike">
   <meta name="keywords" content="Computer Science, Deep Learning, and more">
   
-  <title>琐碎记事 - czqmike&#39;s blog</title>
+  <title>标签 - 备忘 - czqmike&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-  
 
 
 
@@ -66,7 +50,7 @@
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -165,54 +149,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="琐碎记事">
+            <span class="h2" id="subtitle" title="标签 - 备忘">
               
             </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-12-06 00:52" pubdate>
-        2020年12月6日 凌晨
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      508 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      5
-       分钟
-    </span>
-  
-
-  
-  
-    
-      <!-- 不蒜子统计文章PV -->
-      <span id="busuanzi_container_page_pv" style="display: none">
-        <i class="iconfont icon-eye" aria-hidden="true"></i>
-        <span id="busuanzi_value_page_pv"></span> 次
-      </span>
-    
-  
-</div>
 
             
           </div>
@@ -225,154 +164,40 @@
 
   <main>
     
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 1 篇文章</p>
+  <hr>
+  
+  
+    
       
+      <p class="h5">2025</p>
+    
+    <a href="/2025/09/18/WSL%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85zsh%E3%80%81oh-my-zsh%E4%B8%8E%E7%BE%8E%E5%8C%96%E4%B8%BB%E9%A2%98/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">WSL一键安装zsh、oh-my-zsh与美化主题</span>
+      <time style="float: right;">09-18</time>
+    </a>
+  
+</div>
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">琐碎记事</h1>
-            
-              <p class="note note-info">
-                
-                  本文最后更新于：39 分钟前
-                
-              </p>
-            
-            <div class="markdown-body">
-              <h1 id="琐碎记事"><a class="markdownIt-Anchor" href="#琐碎记事"></a> 琐碎记事</h1>
-<blockquote>
-<p>最近天气转凉，人变忙，deadline让我很彷徨，也没啥心思去整理博客和修bug了。。<br />
-在此先稍作记录，等有空了再去一一解决。</p>
-</blockquote>
-<h2 id="踩坑腾讯云上的ubuntu-server-frp配置"><a class="markdownIt-Anchor" href="#踩坑腾讯云上的ubuntu-server-frp配置"></a> 踩坑：腾讯云上的Ubuntu server frp配置</h2>
-<p>我的需求是在阿里云上架设frps，给校园网的一台Ubuntu，一台Win10做内网穿透。<br />
-Ubuntu上的很轻松就弄好了（因为比较熟悉），但Win10上的frpc死活没弄好。症状是frpc.exe启动后显示success，但是流量未被转发。<br />
-一开始以为是Win10的防火墙问题，全部关闭后也未解决。<br />
-又疑是Win10上的Open SSH和Linux上的不一样，查了半天资料发现好像没有什么不同。</p>
-<p>最后发现是因为腾讯云上的Ubuntu有两重防火墙–Ubuntu防火墙UFW和云防火墙。<br />
-对于两个防火墙，都要开放<code>remote port = 6001</code><br />
-我只顾开放了腾讯云上防火墙的6001，而没有开放frpc的6001。导致内网流量无法被接收，转发失败。<br />
-在这时间稀缺的时间点白白浪费n个小时😥</p>
-<p>在此做个记录，望以后的孩纸们引以为戒。</p>
-<h2 id="issue1-博客的latex显示貌似有问题"><a class="markdownIt-Anchor" href="#issue1-博客的latex显示貌似有问题"></a> Issue1: 博客的LaTeX显示貌似有问题</h2>
-<p>VsCode上的Markdown插件可以完美显示，发布到hexo后就无法很好地显示了。<br />
-可能是之前换了LaTeX渲染器的锅，也有可能是自己的语法写的不规范。。</p>
-<h2 id="issue2-发布博文的方式需改进"><a class="markdownIt-Anchor" href="#issue2-发布博文的方式需改进"></a> Issue2: 发布博文的方式需改进</h2>
-<p>现在因为图方便，是直接用VsCode remote到服务器上写博文，pm2挂一个<code>hexo deploy -g</code>当Web Server。<br />
-这样一是不太优雅，二是没有归档。<br />
-以后有时间了在本地和Github上建个中转来解决下。</p>
-<p>P.S.<br />
-VsCode中文输入重影的问题找到了，原来是输入法和Vim插件不兼容，到时候再找下解决的办法吧。</p>
-<h2 id="结语"><a class="markdownIt-Anchor" href="#结语"></a> 结语</h2>
-<p>少年不知愁滋味，欲赋新词强说愁。<br />
-如今略识愁滋味，却道天凉好个秋。</p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透</a>
-                    
-                      <a class="hover-with-bg" href="/tags/frp/">frp</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%97%A5%E5%B8%B8/">日常</a>
-                    
-                      <a class="hover-with-bg" href="/tags/VsCode/">VsCode</a>
-                    
-                  </div>
-                
+
+
+
               </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/03/31/%E9%80%9A%E8%BF%87WSL%E4%BD%BF%E7%94%A8Linux%E4%B8%8A%E7%9A%84GUI%E7%A8%8B%E5%BA%8F/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">通过WSL远程使用Linux上的GUI程序</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2020/12/01/Windows-Terminal%E4%B8%8B%E7%9A%84WSL%E9%85%8D%E7%BD%AEVim%E5%85%89%E6%A0%87/">
-                        <span class="hidden-mobile">Windows Terminal折腾记</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
             </div>
-
-            
-              <!-- Comments -->
-              <article class="comments" id="comments">
-                
-                  
-                
-                
-  <div class="disqus" style="width:100%">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_config = function() {
-        this.page.url = 'http://localhost/2020/12/06/%E7%90%90%E7%A2%8E%E8%AE%B0%E4%BA%8B/';
-        this.page.identifier = '/2020/12/06/%E7%90%90%E7%A2%8E%E8%AE%B0%E4%BA%8B/';
-      };
-      Fluid.utils.waitElementVisible('disqus_thread', function () {
-        var d = document, s = d.createElement('script');
-        s.src = '//' + '' + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', new Date());
-        (d.head || d.body).appendChild(s);
-      });
-    </script>
-    <noscript>Please enable JavaScript to view the
-      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
-    </noscript>
-  </div>
-
-
-              </article>
-            
-          </article>
+          </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
     
 
     
@@ -486,15 +311,9 @@ VsCode中文输入重影的问题找到了，原来是输入法和Vim插件不�
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
 
 
 
@@ -536,13 +355,6 @@ VsCode中文输入重影的问题找到了，原来是输入法和Vim插件不�
 
 
 
-
-  
-
-  
-    <!-- KaTeX -->
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.12.0/katex.min.css" />
-  
 
 
 
