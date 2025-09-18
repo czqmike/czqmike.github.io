@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="">
+  
+  <meta name="author" content="czqmike">
+  <meta name="keywords" content="Computer Science, Deep Learning, and more">
+  
+  <title>抛弃不安全的rm，拥抱trash - czqmike&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"localhost","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>return ;</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="抛弃不安全的rm，拥抱trash">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-02 14:49" pubdate>
+        2021年9月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">抛弃不安全的rm，拥抱trash</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：38 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>起因：晕头转向忙了一天之后，发现工作保存的文件放错了文件夹，于是乎想<code>mv *.jpg ../parent_folder</code>到正确的文件夹，结果手滑输入成了<code>rm *.jpg ../parent_folder</code>，而rm又没有回收站功能。。啪的一下一下午的工作白费了:(<br />
+我开始寻找恢复的方法，最后因为wsl和真正的Linux还是有区别的，不能直接复用，再加上嫌麻烦最后只好重新做了一遍。</p>
+</blockquote>
+<p>经过这番折腾，我终于意识到了“老生常谈”的<code>rm</code>删库跑路离我们并不遥远，遂开始寻找替代方案。</p>
+<h2 id="方案1alias-rmrm-iv"><a class="markdownIt-Anchor" href="#方案1alias-rmrm-iv"></a> 方案1：<code>alias rm=&quot;rm -iv&quot;</code></h2>
+<p><code>rm</code>的设计者肯定也考虑过安全性这个问题，但是笔者认为在这个命令的传播过程中，太多的人图简单，使用<code>rm -rf</code>一把梭，照成了很多人的误用。<br />
+翻看手册后，我发现<code>rm</code>其实是有安全选项的，一个是<code>-i</code>，一个是<code>-I</code>，就是说在进行多个删除操作或是递归删除子文件夹时，会有确认步骤。<code>-i</code>与<code>-I</code>的区别在于：<code>-i</code>总是确认，<code>-I</code>是只有重要或异常情况才确认（具体的说明可以<code>man rm</code>，此处就不再赘述）。<br />
+<code>-v</code>则是打印<code>rm</code>所做的所有操作，做到心知肚明。</p>
+<blockquote>
+<p>-i    prompt before every removal.<br />
+-I    prompt once before removing more than three files, or when removing recursively; less  intrusive  than  -i,  while still giving protection against most mistakes.<br />
+-v, --verbose     explain what is being done.</p>
+</blockquote>
+<p>所以第一个解决方案就是<code>alias rm=&quot;rm -iv&quot;</code>，即每次<code>rm</code>就执行<code>rm -iv</code>，这种方案安全性最高，每次操作都会要求确认并且有操作回显，但是就是及其麻烦，麻烦到什么地步呢？你想象一下你有一位仆人，不管干啥都要请示你一番，洗个衣服都要拿着一堆衣服挨个问你，是不是很崩溃的一种体验。。</p>
+<h2 id="方案2构建回收站"><a class="markdownIt-Anchor" href="#方案2构建回收站"></a> 方案2：构建回收站</h2>
+<p>第二种方案就是模仿GUI桌面中的做法，建一个“回收站”，<code>rm</code>的时候就先放到回收站中，然后再配合定时清除回收站功能，就可以达到比较安全地删除的目的。<br />
+<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000018464527">这篇博文</a>自己实现了这个回收站，但是功能方面可能还有欠缺的地方。 （比方说当删除的文件和回收站的文件重命名时需要更改文件名使其不重复，而如果要恢复又要再改回来，这显然不是很方便）<br />
+这里笔者推荐<code>trash-cli</code>这个工具，它提供<strong>回收站</strong>、<strong>显示回收站</strong>、<strong>清空回收站</strong>、<strong>记录删除的文件信息</strong>（这样就可以避免重命名的问题）、<strong>恢复指定文件</strong>，除了命令行冗长之外几乎没有缺点。</p>
+<h3 id="安装"><a class="markdownIt-Anchor" href="#安装"></a> 安装</h3>
+<p>以Ubuntu为例，直接apt install即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install trash-cli<br></code></pre></td></tr></table></figure>
+<h3 id="用法"><a class="markdownIt-Anchor" href="#用法"></a> 用法</h3>
+<p>trash-cli 提供以下命令<br />
+<code>trash-put</code>： 将文件或目录放到回收站中<br />
+<code>trash-list</code> ：列出回收站中的文件或目录<br />
+<code>trash-restore</code>：从回收站中恢复文件或目录  （实测是<code>restore-trash</code>）<br />
+<code>trash-rm</code>：删除回收站中的文件<br />
+<code>trash-empty</code>：清空回收站</p>
+<p>可以看到用起来还是很简单的，但是由于笔者是究极懒癌，能用2个字母完成的命令就不想用2个单词做，所以写了个简单的替换脚本<a target="_blank" rel="noopener" href="https://github.com/czqmike/LinuxTools/blob/master/rm2ts.sh">rm2ts.sh</a>，可以实现一键替换并且定时清空回收站。<br />
+脚本重命名了<code>ts</code>, <code>lt</code>, <code>rt</code>这三个命令，分别表示删除（移至回收站）、显示回收站、从回收站恢复文件。<br />
+另外<code>trash-cli</code>没有提供一键恢复功能，只能一项一项手动点，这里给出一个替代方案，终端执行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-keyword">while</span> ( <span class="hljs-built_in">echo</span> 0 | rt ); <span class="hljs-keyword">do</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">done</span>;<br></code></pre></td></tr></table></figure>
+<p>这里放出代码，需要请自取。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-built_in">set</span> -Eeu<br><span class="hljs-built_in">set</span> -o pipefail<br><span class="hljs-comment"># set -x</span><br><br>config_file=<span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/.bashrc&quot;</span>  <span class="hljs-comment"># or .zshrc</span><br><br>sudo apt-get install -y trash-cli<br><span class="hljs-comment">## !! Don&#x27;t alias rm to trash, it may break some scripts. </span><br><span class="hljs-keyword">if</span> [ $(grep -c <span class="hljs-string">&#x27;alias rm=&#x27;</span> <span class="hljs-variable">$&#123;config_file&#125;</span>) -eq <span class="hljs-string">&#x27;0&#x27;</span> ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;alias rm=&quot;rm -I&quot;&#x27;</span> &gt;&gt; <span class="hljs-variable">$config_file</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-keyword">if</span> [ $(grep -c <span class="hljs-string">&quot;alias ts=&quot;</span> <span class="hljs-variable">$&#123;config_file&#125;</span>) -eq <span class="hljs-string">&#x27;0&#x27;</span> ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;alias ts=trash-put&#x27;</span> &gt;&gt; <span class="hljs-variable">$config_file</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-keyword">if</span> [ $(grep -c <span class="hljs-string">&quot;alias lt=&quot;</span> <span class="hljs-variable">$&#123;config_file&#125;</span>) -eq <span class="hljs-string">&#x27;0&#x27;</span> ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;alias lt=trash-list&#x27;</span> &gt;&gt; <span class="hljs-variable">$config_file</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-comment">## The moved files are in `~/.local/share/Trash/files`</span><br><span class="hljs-comment">## Use `while ( echo 0 | rt ); do true; done;` or cp to restore files more efficiently.</span><br><span class="hljs-keyword">if</span> [ $(grep -c <span class="hljs-string">&quot;alias rt=&quot;</span> <span class="hljs-variable">$&#123;config_file&#125;</span>) -eq <span class="hljs-string">&#x27;0&#x27;</span> ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;alias rt=restore-trash&#x27;</span> &gt;&gt; <span class="hljs-variable">$config_file</span> <span class="hljs-comment"># or trash-restore, the former works in my own env :)</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-comment">## Disable clearing trash manually.</span><br><span class="hljs-comment"># echo &#x27;alias ct=trash-empty&#x27; &gt;&gt; $config_file</span><br><br><span class="hljs-built_in">source</span> <span class="hljs-variable">$config_file</span><br><br><span class="hljs-comment">## Clear trash each monday 12 A.M. automatically.</span><br>conf=<span class="hljs-string">&quot;.tempconf&quot;</span>_$(date <span class="hljs-string">&quot;+%Y%m%d-%H%M%S&quot;</span>)<br>crontab -l &gt; <span class="hljs-variable">$conf</span><br><span class="hljs-keyword">if</span> [ $(grep -c <span class="hljs-string">&quot;trash-empty&quot;</span> <span class="hljs-variable">$&#123;conf&#125;</span>) -eq <span class="hljs-string">&#x27;0&#x27;</span> ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;0 12 * * 1 trash-empty&quot;</span> &gt;&gt; <span class="hljs-variable">$conf</span> &amp;&amp; crontab <span class="hljs-variable">$conf</span><br><span class="hljs-keyword">fi</span><br>rm -f <span class="hljs-variable">$conf</span><br><br><span class="hljs-built_in">echo</span> <br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;[info] cmd `rm` has been replaced with `ts`, `lt`, `rt` and auto trash clearing has been set.&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>需要注意的是，我这里并没有并没有直接把<code>rm</code> alias 成<code>trash-put</code>，而只是换成了安全性更高的<code>rm -i</code>，原因在于这样做<a target="_blank" rel="noopener" href="https://github.com/andreafrancia/trash-cli#can-i-alias-rm-to-trash-put">可能会破坏其他脚本的行为，出现不可预料的错误</a>，所以还是推荐在想<code>rm</code>的时候用<code>ts</code>代替，这样用户也清楚自己在做什么，也不会产生安全问题，我认为是一种比较好的折中方案了。</p>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>因为吃了次苦头，笔者以后将使用<code>ts</code>替换系统自带的<code>rm</code>，并且写了个简单的脚本完成一键替换。大家以后也请务必小心<code>rm</code>的使用。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/">奇技淫巧</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/01/28/2023%E4%BA%86%EF%BC%8C%E7%BB%99%E8%87%AA%E5%B7%B1%E5%AE%9A%E4%B8%AA%E5%B0%8F%E8%AE%A1%E5%88%92/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2023了，给自己定个小计划</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/23/%E8%AE%B0%E4%B8%80%E6%AC%A1blog%E6%8E%92%E9%94%99/">
+                        <span class="hidden-mobile">记一次blog排错</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://localhost/2021/09/02/%E6%8A%9B%E5%BC%83%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84rm%EF%BC%8C%E6%8B%A5%E6%8A%B1trash/';
+        this.page.identifier = '/2021/09/02/%E6%8A%9B%E5%BC%83%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84rm%EF%BC%8C%E6%8B%A5%E6%8A%B1trash/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + '' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备20003232号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.12.0/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
